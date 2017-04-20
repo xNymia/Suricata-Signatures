@@ -1,4 +1,15 @@
+# Suricata signatures for MS17-010
+# ShadowBrokers - EquationGroup Dump
+# Emma McCall - Riot Games
+
 # EternalBlue Signature matching potential NEW installation of SMB payload
 alert tcp $HOME_NET any -> any any (msg:"EXPLOIT Possible Successful ETERNALBLUE Installation SMB MultiplexID = 82 - MS17-010"; flow:from_server,established; content:"|FF|SMB|32 02 00 00 c0|"; offset:4; depth:9; content:"|52 00|"; distance:21; within:23; classtype:trojan-activity; sid:5000072; rev:1;)
+
 # EternalBlue Signature matching return signature for connection to pre-installed SMB payload
 alert tcp $HOME_NET any -> any any (msg:"EXPLOIT Successful ETERNALBLUE Connection SMB MultiplexID = 81 - MS17-010"; flow:from_server,established; content:"|FF|SMB|32 02 00 00 c0|"; offset:4; depth:9; content:"|51 00|"; distance:21; within:23; classtype:trojan-activity; sid:5000073; rev:1;)
+
+# Signarture to identify what appears to be initial setup trigger for SMBv1 - MultiplexID 64 is another unusual value
+alert tcp $HOME_NET any -> any any (msg:"EXPLOIT Possible ETERNALBLUE SMB Exploit Attempt Stage 1/2 - Tree Connect AndX MultiplexID = 64 - MS17-010"; flow:to_server,established; content:"|FF|SMB|75 00 00 00 00|"; offset:4; depth:9; content:"|40 00|"; distance:21; within:23; flowbits: set, SMB.v1.AndX.MID.64; classtype:trojan-activity; sid:5000074; rev:1;)
+
+# Signature triggers on Trans2 Setup Request with MultiplexID - 65 - Another unusual MID - Only triggers if 64 was seen previously. 
+alert tcp $HOME_NET any -> any any (msg:"EXPLOIT Possible ETERNALBLUE SMB Exploit Attempt Stage 2/2 - Trans2 SUCCESS MultiplexID = 65 - MS17-010"; flow:to_server,established; content:"|FF|SMB|32 00 00 00 00|"; offset:4; depth:9; content:"|41 00|"; distance:21; within:23; flowbits:isset, SMB.v1.AndX.MID.64; classtype:trojan-activity; sid:5000075; rev:1;)
