@@ -4,6 +4,8 @@
 
 alert udp $HOME_NET any -> any 53 (msg:"wCry Ransomware - Termination URL Call"; content:"|01 00 00 01 00 00 00 00 00 00|"; offset:2; depth:10; content:"|29|iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea|03|com|00|"; distance:0; fast_pattern; classtype:trojan-activity; sid:5000090; rev:1;)
 
-alert udp $HOME_NET any -> any 53 (msg:"wCry Ransomware v2 - Termination URL Call"; content:"|01 00 00 01 00 00 00 00 00 00|"; offset:2; depth:10; content:"|29|ifferfsodp9ifjaposdfjhgosurijfaewrwergwea|03|com|00|"; distance:0; fast_pattern; classtype:trojan-activity; sid:5000091; rev:1;)
+alert udp $HOME_NET any -> any 53 (msg:"wCry Ransomware - Termination URL Call"; content:"|01 00 00 01 00 00 00 00 00 00|"; offset:2; depth:10; content:"|29|ifferfsodp9ifjaposdfjhgosurijfaewrwergwea|03|com|00|"; distance:0; fast_pattern; classtype:trojan-activity; sid:5000091; rev:1;)
 
+alert udp $HOME_NET any -> any 53 (msg:"wCry Ransomware - Termination URL Call"; content:"|01 00 00 01 00 00 00 00 00 00|"; offset:2; depth:10; content:"|29|ayylmaotjhsstasdfasdfasdfasdfasdfasdfasdf|03|com|00|"; distance:0; fast_pattern; classtype:trojan-activity; sid:5000092; rev:1;)
 
+alert udp $HOME_NET any -> any 53 (msg:"wCry Ransomware - Termination URL Call"; content:"|01 00 00 01 00 00 00 00 00 00|"; offset:2; depth:10; content:"|29|iuqssfsodp9ifjaposdfjhgosurijfaewrwergwea|03|com|00|"; distance:0; fast_pattern; classtype:trojan-activity; sid:5000093; rev:1;)
